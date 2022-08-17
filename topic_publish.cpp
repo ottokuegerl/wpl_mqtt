@@ -42,6 +42,7 @@ using namespace std;
 
 // const string DFLT_SERVER_ADDRESS { "tcp://192.168.1.39:1883" };
 const string DFLT_SERVER_ADDRESS_2 { "tcp://" + mqtt_srv + ":" + mqtt_port }; // credentials.h
+const string DFLT_SERVER_ADDRESS_3 { "tcp://" + mqtt_srv + ":" + mqtt_port }; // credentials.h
 const string DFLT_SERVER_ADDRESS { "tcp://test.mosquitto.org:1883" };
 
 const string TOPIC { "test" };
