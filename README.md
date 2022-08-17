@@ -37,4 +37,12 @@ the connect() call. It can be specified as:
 
 #### Note that to use "ssl://" or "wss://" you must compile the library with OpenSSL, and you must supply a set of ssl_options with the connect_options.
 
+# CMakeLists.txt
+- cmake_minimum_required(VERSION 3.23)
+- project(wpl_mqtt)
+- set(CMAKE_CXX_STANDARD 20)
+- add_executable(wpl_mqtt topic_publish.cpp)
+- target_link_libraries(wpl_mqtt paho-mqttpp3 paho-mqtt3as)
+
+
 # - END
