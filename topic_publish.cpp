@@ -20,15 +20,14 @@
 #include <chrono>
 #include <cstring>
 #include "mqtt/async_client.h"
-#include "credentials.h"
 
 using namespace std;
 
-// const string DFLT_SERVER_ADDRESS { "tcp://192.168.1.39:1883" };
-const string DFLT_SERVER_ADDRESS_2 { "tcp://" + mqtt_srv + ":" + mqtt_port }; // credentials.h
-const string DFLT_SERVER_ADDRESS { "tcp://test.mosquitto.org:1883" };
+const string DFLT_SERVER_ADDRESS   { "tcp://test.mosquitto.org:1883" };
 
-const string TOPIC { "test" };
+const string CLIENTID { "Raspberry zero office" };
+
+const string TOPIC { "WPL" };
 const int QOS = 1;
 
 const char* PAYLOADS[] = {
@@ -41,17 +40,15 @@ const char* PAYLOADS[] = {
 
 const auto TIMEOUT = std::chrono::seconds(10);
 
-/////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char* argv[])
+int main()
 {
-	string address = (argc > 1) ? string(argv[1]) : DFLT_SERVER_ADDRESS;
+    cout << "\n... used server ---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
+    cout << "    TOPIC:      ---> " << TOPIC << " <---\n" << endl;
 
-    cout << "\n---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
-    cout << "---> " << DFLT_SERVER_ADDRESS_2 << " <---\n" << endl;
+	cout << "Initializing for server '" << DFLT_SERVER_ADDRESS << "'..." << endl;
 
-	cout << "Initializing for server '" << address << "'..." << endl;
-	mqtt::async_client cli(address, "");
+    mqtt::async_client cli(DFLT_SERVER_ADDRESS, CLIENTID);
 
 	cout << "  ...OK" << endl;
 
@@ -62,7 +59,7 @@ int main(int argc, char* argv[])
 
 		cout << "\nPublishing messages..." << endl;
 
-		mqtt::topic top(cli, "test", QOS);
+		mqtt::topic top(cli, TOPIC, QOS);
 		mqtt::token_ptr tok;
 
 		size_t i = 0;

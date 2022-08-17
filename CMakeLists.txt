@@ -4,7 +4,8 @@ project(wpl_mqtt)
 set(CMAKE_CXX_STANDARD 20)
 
 # executable --> wpl_mqtt
-add_executable(wpl_mqtt topic_publish.cpp)
+# add_executable(wpl_mqtt topic_publish.cpp)
+add_executable(wpl_mqtt publish_2.cpp)
 
 # link library
 # with SSL    --> paho-mqtt3as
