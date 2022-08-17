@@ -1,7 +1,6 @@
 # WPL - MQTT repository
 
-## Install
-### eclipse/paho.mqtt.cpp
+## Install "eclipse/paho.mqtt.cpp"
 ### https://github.com/eclipse/paho.mqtt.cpp
 
 - sudo apt-get install build-essential gcc make cmake cmake-gui cmake-curses-gui
