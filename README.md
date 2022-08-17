@@ -7,8 +7,8 @@
 - sudo apt-get install libssl-dev
 - sudo apt-get install doxygen graphviz
 
-- Before building the C++ library, first, build and install the Paho C library
-- Building the Paho C library
+#### Before building the C++ library, first, build and install the Paho C library
+#### Building the Paho C library
 - git clone https://github.com/eclipse/paho.mqtt.c.git
 - cd paho.mqtt.c
 - git checkout v1.3.8
@@ -17,7 +17,7 @@
 - sudo ldconfig
 #### This builds with SSL/TLS enabled. If that is not desired, omit the -DPAHO_WITH_SSL=ON
 
-- Building the Paho C++ library
+#### Building the Paho C++ library
 - git clone https://github.com/eclipse/paho.mqtt.cpp
 - cd paho.mqtt.cpp
 - cmake -Bbuild -H. -DPAHO_BUILD_STATIC=ON -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE
