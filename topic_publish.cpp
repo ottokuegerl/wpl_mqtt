@@ -36,11 +36,12 @@
 #include <chrono>
 #include <cstring>
 #include "mqtt/async_client.h"
+#include "credentials.h"
 
 using namespace std;
 
-// const string DFLT_SERVER_ADDRESS { "tcp://localhost:1883" };
 // const string DFLT_SERVER_ADDRESS { "tcp://192.168.1.39:1883" };
+const string DFLT_SERVER_ADDRESS_2 { "tcp://" + mqtt_srv + ":" + mqtt_port }; // credentials.h
 const string DFLT_SERVER_ADDRESS { "tcp://test.mosquitto.org:1883" };
 
 const string TOPIC { "test" };
@@ -61,6 +62,9 @@ const auto TIMEOUT = std::chrono::seconds(10);
 int main(int argc, char* argv[])
 {
 	string address = (argc > 1) ? string(argv[1]) : DFLT_SERVER_ADDRESS;
+
+    cout << "\n---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
+    cout << "---> " << DFLT_SERVER_ADDRESS_2 << " <---\n" << endl;
 
 	cout << "Initializing for server '" << address << "'..." << endl;
 	mqtt::async_client cli(address, "");
