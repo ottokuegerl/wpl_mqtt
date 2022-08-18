@@ -13,12 +13,9 @@
 //
 
 #include <iostream>
-#include <cstdlib>
 #include <string>
 #include <thread>	// For sleep
-#include <atomic>
 #include <chrono>
-#include <cstring>
 #include "mqtt/async_client.h"
 #include "credentials.h"
 
