@@ -87,10 +87,17 @@ int main()
         // Publish a message
         // ######################################
         cout << "\nPublishing message..." << endl;
-        string myMessage = { "This is my message from Raspberry zero in the office"};
-        auto msg = mqtt::make_message(TOPIC, myMessage, QOS, false);
-        client.publish(msg)->wait_for(TIMEOUT);
-        cout << "  ...OK" << endl;
+        string myMessage_1 = { "This is my message #111 from Raspberry zero in the office"};
+        auto msg_1 = mqtt::make_message(TOPIC, myMessage_1, QOS, false);
+
+        string myMessage_2 = { "This is my message #222 from Raspberry zero in the office"};
+        auto msg_2 = mqtt::make_message(TOPIC, myMessage_2, QOS, false);
+
+        for(int i = 0; i < 10; i++){
+            client.publish(msg_1)->wait_for(TIMEOUT);
+            client.publish(msg_2)->wait_for(TIMEOUT);
+            cout << "\n  ...OK" << endl;
+        }
 
         // ######################################
         // Disconnect from server
