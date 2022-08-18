@@ -1,4 +1,4 @@
-// topic_publish.cpp
+// publish_2.cpp
 //
 // This is a Paho MQTT C++ client, sample application.
 //
@@ -7,7 +7,7 @@
 // send data to the same topic.
 //
 // The sample demonstrates:
-//  - Connecting to an MQTT server/broker
+//  - Connecting to an MQTT server/broker via user and password
 //  - Publishing messages
 //  - Use of the 'topic' class
 //
@@ -32,9 +32,9 @@ const int QOS = 1;
 const auto TIMEOUT = std::chrono::seconds(10);
 
 
-/**
- * A callback class for use with the main MQTT client.
- */
+// ######################################
+// A callback class for use with the main MQTT client
+// ######################################
 class callback : public virtual mqtt::callback
 {
 public:
@@ -53,13 +53,13 @@ public:
 
 int main()
 {
-    cout << "\n... used server ---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
-    cout << "         TOPIC: ---> " << TOPIC << " <---\n" << endl;
+    cout << "\ntry to connect to server ---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
+    cout << "                  TOPIC: ---> " << TOPIC << " <---\n" << endl;
 
     // ######################################
     // Initializing server
     // ######################################
-    cout << "Initializing for server ---> " << DFLT_SERVER_ADDRESS << " <---" << endl;
+    cout << "Initializing server      ---> " << MQTT_SRV << " <---" << endl;
     mqtt::async_client client(DFLT_SERVER_ADDRESS, CLIENTID);
 
     callback cb;
@@ -69,19 +69,18 @@ int main()
     // Build the connect options
     // ######################################
     auto connectOptions = mqtt::connect_options_builder().user_name(MQTT_USR).password(MQTT_PSW).finalize();
-
-    cout << "  ...OK" << endl;
+    cout << "\nconnect options          ---> OK <---" << endl;
 
     try {
         // ######################################
         // Connecting to server
         // ######################################
-        cout << "\nConnecting..." << endl;
+        cout << "\nConnecting ..." << endl;
         mqtt::token_ptr connectToken;
         connectToken = client.connect(connectOptions);
-        cout << "\nWaiting for the connection..." << endl;
+        cout << "\nWaiting for the connection ..." << endl;
         connectToken->wait();
-        cout << "  ...OK" << endl;
+        cout << "\nconnection               ---> OK <---" << endl;
 
         // ######################################
         // Publish a message
@@ -96,7 +95,7 @@ int main()
         for(int i = 0; i < 10; i++){
             client.publish(msg_1)->wait_for(TIMEOUT);
             client.publish(msg_2)->wait_for(TIMEOUT);
-            cout << "\n  ...OK" << endl;
+            // cout << "\npublishing messages ---> OK <---" << endl;
         }
 
         // ######################################
@@ -104,8 +103,7 @@ int main()
         // ######################################
         cout << "\nDisconnecting..." << endl;
         client.disconnect()->wait();
-        cout << "  ...OK" << endl;
-
+        cout << "\nDisconnected from server ---> OK <---" << endl;
     }
     catch (const mqtt::exception& exc) {
         cerr << exc.what() << endl;
