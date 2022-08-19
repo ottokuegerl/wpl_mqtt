@@ -89,10 +89,9 @@ int main()
         string myMessage_2 = { "This is my message #222 from Raspberry zero in the office"};
         auto msg_2 = mqtt::make_message(TOPIC, myMessage_2, QOS, false);
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100; i++){
             client.publish(msg_1)->wait_for(TIMEOUT);
             client.publish(msg_2)->wait_for(TIMEOUT);
-            // cout << "\npublishing messages ---> OK <---" << endl;
         }
 
         // ######################################
