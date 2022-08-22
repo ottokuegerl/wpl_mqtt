@@ -22,7 +22,7 @@
 using namespace std;
 
 const string DFLT_SERVER_ADDRESS { "tcp://" + MQTT_SRV + ":" + MQTT_PORT }; // credentials.h
-const string CLIENTID { "Raspberry zero office" };
+const string CLIENTID { "NUC8_office" };
 const string TOPIC { "WPL_TOPIC" };
 
 const int QOS = 1;
@@ -82,22 +82,29 @@ int main()
         // ######################################
         // Publish a message
         // ######################################
-        cout << "\nPublishing message..." << endl;
-        string myMessage_1 = { "This is my message #111 from Raspberry zero in the office"};
+        cout << "\n---> Publishing message... <---" << endl;
+        string myMessage_1 = { "This is message #1 --> NUC8 office <---"};
         auto msg_1 = mqtt::make_message(TOPIC, myMessage_1, QOS, false);
 
-        string myMessage_2 = { "This is my message #222 from Raspberry zero in the office"};
+        string myMessage_2 = { "This is message #2 --> NUC8 office <---"};
         auto msg_2 = mqtt::make_message(TOPIC, myMessage_2, QOS, false);
+
+        cout << "\n... type any text to publish: ";
+        string myMessage_3;
+        getline(cin, myMessage_3);
+        cout << "this message will be sent ---> " << myMessage_3 << " <---" << endl;
+        auto msg_3 = mqtt::make_message(TOPIC, myMessage_3, QOS, false);
 
         for(int i = 0; i < 100; i++){
             client.publish(msg_1)->wait_for(TIMEOUT);
             client.publish(msg_2)->wait_for(TIMEOUT);
+            client.publish(msg_3)->wait_for(TIMEOUT);
         }
 
         // ######################################
         // Disconnect from server
         // ######################################
-        cout << "\nDisconnecting..." << endl;
+        cout << "\n---> Disconnecting... <---" << endl;
         client.disconnect()->wait();
         cout << "\nDisconnected from server ---> OK <---" << endl;
     }
